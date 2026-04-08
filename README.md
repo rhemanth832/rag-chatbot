@@ -195,7 +195,7 @@ Max file size: **16 MB**
 - **Backend:** Flask (Python)
 - **LLM:** LLaMA 3 8B via Groq API
 - **Frontend:** HTML5 + CSS3 + Vanilla JS
-- **PDF parsing:** PyPDF2
+- **PDF parsing:** pdfplumber
 - **DOCX parsing:** python-docx
 - **Deployment:** Render / Railway
 
