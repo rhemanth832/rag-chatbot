@@ -118,6 +118,21 @@ Your app will be live at `https://rag-chatbot.onrender.com` in ~2 minutes.
 
 ---
 
+## 🚀 Deploy to Railway (Alternative)
+
+```bash
+# Install Railway CLI
+npm install -g @railway/cli
+
+# Login and deploy
+railway login
+railway init
+railway up
+railway variables set GROQ_API_KEY=your_key_here
+```
+
+---
+
 ## ⚙️ How RAG Works Here
 
 ```
@@ -165,7 +180,15 @@ Max file size: **16 MB**
 | Max file size   | 16 MB            | `app.config`      |
 | Port            | 5000             | `app.run()`       |
 
+---
 
+## 🔒 Notes
+
+- Documents are stored **in-memory** — they reset when the server restarts. For production, swap to a vector database like ChromaDB, Pinecone, or Weaviate.
+- Chat history is kept for the last 10 turns per session.
+- The retrieval uses keyword overlap (no embeddings). For better semantic search, integrate `sentence-transformers`.
+
+---
 
 ## 📦 Tech Stack
 
@@ -177,3 +200,7 @@ Max file size: **16 MB**
 - **Deployment:** Render / Railway
 
 ---
+
+## 📄 License
+
+MIT — free to use, modify, and deploy.
