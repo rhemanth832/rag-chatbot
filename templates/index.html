@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RAG Chatbot</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <div class="app-shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <span class="logo-icon">◈</span>
+          <span class="logo-text">RAG<em>bot</em></span>
+        </div>
+        <p class="sidebar-tagline">Chat with your documents</p>
+      </div>
+
+      <div class="upload-zone" id="uploadZone">
+        <input type="file" id="fileInput" accept=".txt,.pdf,.docx,.md" hidden/>
+        <div class="upload-icon">⬆</div>
+        <p class="upload-label">Drop file or <span class="upload-link" onclick="document.getElementById('fileInput').click()">browse</span></p>
+        <p class="upload-hint">PDF · DOCX · TXT · MD</p>
+        <div class="upload-progress" id="uploadProgress">
+          <div class="upload-bar" id="uploadBar"></div>
+        </div>
+      </div>
+
+      <div class="docs-section">
+        <div class="docs-header">
+          <span>Documents</span>
+          <span class="doc-count" id="docCount">0</span>
+        </div>
+        <ul class="doc-list" id="docList">
+          <li class="doc-empty">No documents yet</li>
+        </ul>
+      </div>
+
+      <button class="clear-btn" onclick="clearChat()">⟳ Clear Chat</button>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="chat-area">
+      <header class="chat-header">
+        <div class="status-dot" id="statusDot"></div>
+        <span class="model-tag">llama3-8b · groq</span>
+        <span class="rag-badge" id="ragBadge">RAG OFF</span>
+      </header>
+
+      <div class="messages" id="messages">
+        <div class="welcome-msg">
+          <div class="welcome-icon">◈</div>
+          <h2>Hello, I'm RAGbot</h2>
+          <p>Upload documents on the left, then ask me anything about them. I'll retrieve relevant passages and answer with context.</p>
+          <div class="quick-prompts">
+            <button onclick="sendQuick('Summarize the uploaded document')">Summarize document</button>
+            <button onclick="sendQuick('What are the key points?')">Key points</button>
+            <button onclick="sendQuick('What questions can I ask about this document?')">What can I ask?</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-row">
+        <div class="input-wrapper">
+          <textarea id="userInput" placeholder="Ask anything about your documents…" rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+          <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+            <span class="send-icon">→</span>
+          </button>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
